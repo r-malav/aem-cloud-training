@@ -1,0 +1,19 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
+    <sly data-sly-call="${clientlib.all @ categories='AEM.Training.card'}"/>
+</sly>
+
+
+
+
+<h2>new card components <h2>
+
+<div class="card">
+  <img src=${properties.imagecomp} alt="Avatar" style="width:100%">
+  <div class="container">
+
+<h3>name:<h3>
+    <h4><b>${properties.title}</b></h4> 
+
+<h3>discription:<h3>
+ <h5><p>${properties.discription}</p> </h5> 
+  </div>
