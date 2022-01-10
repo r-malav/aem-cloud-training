@@ -35,9 +35,9 @@ public class OsgiConfigDemoimpl implements OsgiConfigDemo{
 
         @AttributeDefinition(
                 name = "Live Data",
-                description = "Check this to get live data.",
+                description = "Check this to  Available data or not.",
                 type = AttributeType.BOOLEAN)
-        boolean getLiveData() default false;
+        boolean isLiveAvailable() default false;
 
         @AttributeDefinition(
                 name = "Countries",
@@ -61,7 +61,7 @@ public class OsgiConfigDemoimpl implements OsgiConfigDemo{
     private int serviceCount;
     private boolean liveData;
     private String[] countries;
-    private String runModes;
+
 
 
 
@@ -70,9 +70,8 @@ public class OsgiConfigDemoimpl implements OsgiConfigDemo{
     {
         serviceName=serviceConfig.serviceName();
         serviceCount=serviceConfig.getServiceCount();
-        liveData=serviceConfig.getLiveData();
+        liveData=serviceConfig.isLiveAvailable();
         countries=serviceConfig.getCountries();
-        runModes=serviceConfig.getRunMode();
     }
 
     @Override
@@ -82,22 +81,18 @@ public class OsgiConfigDemoimpl implements OsgiConfigDemo{
 
     @Override
     public int getServiceCount() {
-        return 0;
+        return serviceCount;
     }
 
     @Override
-    public boolean isLiveData() {
-        return false;
+    public boolean isLiveAvailable() {
+        return liveData;
     }
 
     @Override
     public String[] getCountries() {
-        return new String[0];
+        return  countries;
     }
 
-    @Override
-    public String getRunModes() {
-        return null;
-    }
 
 }
