@@ -9,12 +9,14 @@ import org.osgi.service.metatype.annotations.AttributeType;
 import org.osgi.service.metatype.annotations.Designate;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 import org.osgi.service.metatype.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component(service = OsgiConfigDemo.class, immediate = true)
 @Designate(ocd = OsgiConfigDemoimpl.serviceConfig.class)
 public class OsgiConfigDemoimpl implements OsgiConfigDemo{
 
-
+    private static  final Logger logger= LoggerFactory.getLogger(OsgiConfigDemoimpl.class);
     @ObjectClassDefinition(
             name = "Ritesh osgi demo -first",
             description = "my osgi dem0 first"
@@ -24,14 +26,14 @@ public class OsgiConfigDemoimpl implements OsgiConfigDemo{
                 name = "serviceConfig first field",
                 description = "serviceConfig first field",
                 type = AttributeType.STRING)
-        public String serviceName() default "osgi demo firsdt";
+       String serviceName() default "osgi demo first";
 
         @AttributeDefinition(
                 name = "serviceConfig first int field",
                 description = "serviceConfig first int field",
                 type = AttributeType.INTEGER
         )
-        public int getServiceCount() default 5;
+       int getServiceCount() default 5;
 
         @AttributeDefinition(
                 name = "Live Data",
@@ -44,7 +46,7 @@ public class OsgiConfigDemoimpl implements OsgiConfigDemo{
                 description = "Add countries locales for which you want to run this service.",
                 type = AttributeType.STRING
         )
-        String[] getCountries() default {"de", "in"};
+        String[] getCountries() default {"ritesh", "malav","one","two","three"};
 
         @AttributeDefinition(
                 name = "Run Modes",
@@ -52,26 +54,27 @@ public class OsgiConfigDemoimpl implements OsgiConfigDemo{
                 options = {
                         @Option(label = "Author", value = "author"),
                         @Option(label = "Publish", value = "publish"),
-                        @Option(label = "Both", value = "both")
+                        @Option(label = "Ritesh", value = "Ritesh"),
+                        @Option(label = "Malav", value = "Malav"),
+                        @Option(label = "abc", value = "abc"),
+                        @Option(label = "atoz", value = "atoz")
                 },
                 type = AttributeType.STRING)
         String getRunMode() default "both";
     }
     private String serviceName;
     private int serviceCount;
-    private boolean liveData;
+    private boolean liveAvailable;
     private String[] countries;
-
-
-
 
     @Activate
     protected void activates(serviceConfig serviceConfig)
     {
         serviceName=serviceConfig.serviceName();
         serviceCount=serviceConfig.getServiceCount();
-        liveData=serviceConfig.isLiveAvailable();
+        liveAvailable=serviceConfig.isLiveAvailable();
         countries=serviceConfig.getCountries();
+ logger.info("serviceName :{}");
     }
 
     @Override
@@ -86,13 +89,12 @@ public class OsgiConfigDemoimpl implements OsgiConfigDemo{
 
     @Override
     public boolean isLiveAvailable() {
-        return liveData;
+        return liveAvailable;
     }
 
     @Override
     public String[] getCountries() {
         return  countries;
     }
-
 
 }

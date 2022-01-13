@@ -23,10 +23,8 @@ public class ActivitesImpl implements Activities {
             name = "Training Examples Randam Activites config ", description = "Randam Activites config"
     )
     @interface Config {
-
         @AttributeDefinition(name = "List of Activites ", description = "Activites", type = AttributeType.STRING)
         String[] randomActivites() default {"Camping", "skiing", "swmming", "hiking", "skateboarding"};
-
 
         @AttributeDefinition(name = "Randamseeds", description = "Randamseeds", type = AttributeType.INTEGER)
         int randamseeds() default 20;
@@ -36,15 +34,15 @@ public class ActivitesImpl implements Activities {
     private int randamseeds;
     private final Random random = new Random();
 
-
     @Activate
     protected void activate(Config config) {
        /* this.randomActivites = new String[]{
                 "Camping", "skiing", "swmming", "hiking", "skateboarding"
         };*/
         this.randomActivites = config.randomActivites();
+        this.randamseeds=config.randamseeds();
         logger.info("ActivitesImpl services randomActivites  [{}]", String.join(",", this.randomActivites));
-        logger.info("Random seed:{}", randamseeds);
+        logger.info("Random seed:{}", this.randamseeds);
     }
 
     @Override
@@ -52,7 +50,6 @@ public class ActivitesImpl implements Activities {
         int randomIndex = random.nextInt(randomActivites.length);
         return randomActivites[randomIndex];
     }
-
 
     @Deactivate
     protected void deactivate() {

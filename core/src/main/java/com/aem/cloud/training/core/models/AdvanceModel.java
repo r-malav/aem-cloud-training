@@ -46,6 +46,7 @@ public class AdvanceModel {
     {
         logger.info("hello advance model ");
         logger.info("current page path:{}",currentPage.getPath());
+        logger.info("current page path:{}",currentPage.getTitle());
         logger.info("current page resource:{}",resource.getPath());
         logger.info("current page title:{}",pageProperties.get("jcr:title", StringUtils.EMPTY));
         logger.info("current page resourceType:{}",pageProperties.get("sling:resourceType", StringUtils.EMPTY));
