@@ -1,0 +1,10 @@
+ {
+    "scripts": [
+      "create path (sling:OrderedFolder) /content/dam/AEM-Cloud-Training",
+      "create path (nt:unstructured) /content/dam/AEM-Cloud-Training/jcr:content",
+      "set properties on /content/dam/AEM-Cloud-Training/jcr:content",
+      "set cq:conf{String} to /conf/AEM-Cloud-Training",
+      "set jcr:title{String} to \"AEM-Cloud-Training\"",
+      "end"
+    ]
+  }
