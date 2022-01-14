@@ -67,6 +67,7 @@ public class OsgiConfigDemoimpl implements OsgiConfigDemo{
     private boolean liveAvailable;
     private String[] countries;
 
+
     @Activate
     protected void activates(serviceConfig serviceConfig)
     {

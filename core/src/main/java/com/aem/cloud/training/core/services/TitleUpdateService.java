@@ -3,6 +3,6 @@ package com.aem.cloud.training.core.services;
 import org.osgi.annotation.versioning.ProviderType;
 
 @ProviderType
-public interface Changetitleservice {
+public interface TitleUpdateService {
     boolean updatedata(String title);
 }

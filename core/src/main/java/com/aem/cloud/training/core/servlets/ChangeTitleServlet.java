@@ -1,10 +1,9 @@
 package com.aem.cloud.training.core.servlets;
 
 
-import com.aem.cloud.training.core.services.Changetitleservice;
+import com.aem.cloud.training.core.services.TitleUpdateService;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
-import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.apache.sling.api.servlets.HttpConstants;
 import org.apache.sling.api.servlets.ServletResolverConstants;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
@@ -25,17 +24,14 @@ import java.io.PrintWriter;
 public class ChangeTitleServlet extends SlingAllMethodsServlet {
 
     @Reference
-    private ResourceResolverFactory resourceResolverFactory;
-
-    @Reference
-    private Changetitleservice changetitleservice;
+    private TitleUpdateService titleUpdateService;
 
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         String title = request.getParameter("title");
-        boolean status = changetitleservice.updatedata(title);
+        boolean status = titleUpdateService.updatedata(title);
         if (status != false) {
             out.println("title is updated");
         } else {
