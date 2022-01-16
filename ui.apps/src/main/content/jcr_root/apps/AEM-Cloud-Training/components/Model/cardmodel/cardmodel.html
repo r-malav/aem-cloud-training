@@ -1,0 +1,23 @@
+<p data-sly-test.edit="${wcmmode.edit}" data-emptytext="enter persnal details" class="cq-placeholder"></p>
+
+<p>hello</p>
+<sly data-sly-use.cardmodel="com.aem.cloud.training.core.models.CardModel">
+
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
+    <sly data-sly-call="${clientlib.all @ categories='AEM.Training.card'}"/>
+</sly>
+
+ <div class="card">
+  <img src=${cardmodel.cardimage} alt="Avatar" style="width:100%">
+  <div class="container">
+
+<h3>name:<h3>
+    <h4><b>${cardmodel.fullname}</b></h4> 
+
+<h3>discription:<h3>
+ <h5><p>${cardmodel.discription}</p> </h5> 
+
+<h5><p>${cardmodel.resourceType}</p> </h5> 
+  </div>
+
+</sly>

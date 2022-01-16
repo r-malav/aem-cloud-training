@@ -1,0 +1,30 @@
+<p data-sly-test.edit="${wcmmode.edit}" data-emptytext="enter persnal details" class="cq-placeholder"></p>
+
+<sly data-sly-use.tspmodel="com.aem.cloud.training.core.models.TreeNModel">
+
+    <p>First Name : ${tspmodel.fname}</p>
+    <p>Last Name : ${tspmodel.lname}</p>
+
+
+    <ul data-sly-list.addressList=${tspmodel.addresslist}>
+
+        <li>State : ${addressList.state}</li>
+        <li>City : ${addressList.city}</li>
+        <ul data-sly-list.districtlist=${addressList.districtList}>
+            <li>village : ${districtlist.village}</li>
+            <li>pincode : ${districtlist.pincode}</li>
+        </ul>
+    </ul>
+    <ul data-sly-list.educationList=${tspmodel.educationList}>
+        <li>Subject : ${educationList.subject}</li>
+
+            <h1>hello</h1>
+        <ul data-sly-list.certificationList=${educationList.courseList}>
+            <h1>hello</h1>
+            <li>certificate : ${certificationList.certificatecode}</li>
+
+            <h1>hello</h1>
+        </ul>
+
+    </ul>
+</sly>
