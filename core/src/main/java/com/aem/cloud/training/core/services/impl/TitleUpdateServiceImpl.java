@@ -25,7 +25,7 @@ public class TitleUpdateServiceImpl implements TitleUpdateService {
     )
     @interface Configpath {
         @AttributeDefinition(name = "Title path ", description = "Title path", type = AttributeType.STRING)
-        String titlepath() default "/content/AEM-Cloud-Training/us/en/first-page/jcr:content/root/container/title";
+         String titlepath() default "/content/AEM-Cloud-Training/us/en/newpage/jcr:content/root/container/title";
     }
 
     @Reference
@@ -37,23 +37,23 @@ public class TitleUpdateServiceImpl implements TitleUpdateService {
 
     @Activate
     protected void activate(Configpath configpath) {
-
         this.compPath = configpath.titlepath();
         logger.debug("path :{}", compPath);
     }
 
     @Override
-    public boolean updatedata(String title) {
+    public boolean updatedata(String titlenew) {
         logger.debug("getResourceResolver :{}", getResourceResolver());
         ResourceResolver serviceResolver = getResourceResolver();
         if (serviceResolver != null) {
-            Resource titleNode = serviceResolver.getResource(compPath);
             logger.debug("path :{}", compPath);
+            Resource titleNode = serviceResolver.getResource(compPath);
+            logger.debug("titleNode :{}", titleNode);
             try {
                 if (titleNode != null) {
                     ModifiableValueMap modifiableValueMap = titleNode.adaptTo(ModifiableValueMap.class);
                     if (modifiableValueMap != null) {
-                        modifiableValueMap.put("title", title);
+                        modifiableValueMap.put("title", titlenew);
                         serviceResolver.commit();
                         return true;
                     } else {
@@ -75,7 +75,6 @@ public class TitleUpdateServiceImpl implements TitleUpdateService {
     private ResourceResolver getResourceResolver() {
         final Map<String, Object> userauth = Collections.singletonMap(ResourceResolverFactory.SUBSERVICE, "training-statistics-service");
         logger.debug("userauth ::::::::::::::::::{}", userauth);
-
         try {
             logger.debug("userauth ::::::::::::::::::{}", resourceResolverFactory.getServiceResourceResolver(userauth));
             return resourceResolverFactory.getServiceResourceResolver(userauth);

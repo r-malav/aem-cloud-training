@@ -1,14 +1,13 @@
 package com.aem.cloud.training.core.models;
 
-
 import com.aem.cloud.training.core.beans.Address;
-import com.aem.cloud.training.core.beans.Education;
-import com.aem.cloud.training.core.beans.Sports;
+import com.aem.cloud.training.core.beans.AddressT;
+import com.aem.cloud.training.core.beans.District;
+import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
-import org.apache.commons.lang.StringUtils;
 import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.slf4j.Logger;
@@ -18,63 +17,67 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
-@Model(adaptables = Resource.class,defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+
+@Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class TreeNModel {
 
-    private final static Logger logger= LoggerFactory.getLogger(TreeNModel.class);
-    @ValueMapValue
-    private String firstname;
+    private final static Logger logger = LoggerFactory.getLogger(TreeNModel.class);
 
     @ValueMapValue
-    private String lastname;
+    private String fname;
+
+    @ValueMapValue
+    private String lname;
 
     @ChildResource
-    Resource education;
+    private Resource address;
 
     @ChildResource
-    Resource Address;
+    private Resource district;
 
-    @ChildResource
-    Resource sports;
-
-
-
-    private List<Address> addressList;
-
-    private List<Education>educationList;
-
-    private List<Sports>sportsList;
-
-   @PostConstruct
-   protected void init(){
-       logger.info("hello TREEnMODELS");
-       logger.info("First Name :{}",firstname,"Last Nmae:{}",lastname);
-
-       educationList=new ArrayList<>();
-       if(education!=null)
-       {
-           education.listChildren().forEachRemaining(item->{
-               ValueMap  valueMap= item.getValueMap();
-               String SchoolName=valueMap.get("schoolname",StringUtils.EMPTY);
-               List<String> CourseList= new ArrayList<>();
-               Resource SubjectCourse=item.getChild("course");
-
-               if(SubjectCourse!=null)
-               {
-                   SubjectCourse.listChildren().forEachRemaining(child->{
-                       ValueMap childValueMap = child.getValueMap();
-                       String subname1 = childValueMap.get("subname",StringUtils.EMPTY);
-                       CourseList.add(subname1);
-                   });
-
-               }
-           });
-
-       }
+    @ValueMapValue
+    private List<AddressT> addresslist;
 
 
-   }
+    @PostConstruct
+    protected void init() {
+        logger.info("first Nmae :{}", fname);
+        logger.info("Last Name :{}", lname);
+        addresslist = new ArrayList<>();
+        if (address != null) {
+            address.listChildren().forEachRemaining(item -> {
+                ValueMap valuemap = item.getValueMap();
+                String State = valuemap.get("state", StringUtils.EMPTY);
+                String city = valuemap.get("city", StringUtils.EMPTY);
 
+                List<District> districtList = new ArrayList<>();
+                Resource districtRsource = item.getChild("district");
+                if (districtRsource != null) {
+                    districtRsource.listChildren().forEachRemaining(ditem -> {
+                        ValueMap valueMap1 = ditem.getValueMap();
+                        String village = valueMap1.get("village", StringUtils.EMPTY);
+                        String pincode = valueMap1.get("pincode", StringUtils.EMPTY);
 
+                        District district = new District(village, pincode);
+                        districtList.add(district);
+                    });
+                }
+                AddressT address = new AddressT(State, city, districtList);
+                addresslist.add(address);
+            });
+        }
 
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public List<AddressT> getAddresslist() {
+        return addresslist;
+    }
 }
