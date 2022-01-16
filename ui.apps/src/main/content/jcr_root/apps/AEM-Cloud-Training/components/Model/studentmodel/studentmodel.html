@@ -1,0 +1,21 @@
+<p data-sly-test.edit="${wcmmode.edit}" data-emptytext="Enter Student Details" class="cq-placeholder"></p>
+
+
+<sly data-sly-use.stumodel="com.aem.cloud.training.core.models.StudentModel">
+
+
+ <div class="card">
+  <div class="container">
+
+<h3>First Name:${stumodel.firstname}</h3> 
+
+<h3>Last Name:${stumodel.lastname}</h3> 
+
+<h3>City Name:${stumodel.city}</h3>
+
+ <h3>pincode:${stumodel.pincode}</h3> 
+
+</div>
+
+</div>
+</sly>

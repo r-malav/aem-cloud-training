@@ -1,0 +1,18 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
+    <sly data-sly-call="${clientlib.all @ categories='AEM-Cloud-Training.service'}"/>
+</sly>
+<sly data-sly-use.model="com.aem.cloud.training.core.models.ActivitesModel">
+
+
+
+<table class="myTable">
+   <tr>
+       <th>Service Methods</th>
+       <th>result</th>
+   </tr>
+   <tr>
+       <td>getRandomActivity()</td>
+       <td>${model.randomActivity}</td>
+   </tr>
+
+</table>

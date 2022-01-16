@@ -1,0 +1,22 @@
+<p data-sly-test.edit="${wcmmode.edit}" data-emptytext="enter persnal details" class="cq-placeholder"></p>
+
+
+<sly data-sly-use.empmodel="com.aem.cloud.training.core.models.EmployeeModel">
+
+
+<h3>Company Name:${empmodel.companyname}</h3> 
+
+<h3>Employee Name:${empmodel.employeename}</h3> 
+
+<h3>Designation:${empmodel.designation}</h3>
+
+  <sly data-sly-list.item="${empmodel.addressList}">
+
+       <h3>Employee Address:${item.state}</h3> 
+
+ <h3>Employee city:${item.city}</h3> 
+
+ <h3>city Pincode:${item.pincode}</h3> 
+</sly>
+
+</sly>
