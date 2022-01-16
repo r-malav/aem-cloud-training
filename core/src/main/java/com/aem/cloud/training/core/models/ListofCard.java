@@ -30,10 +30,6 @@ public class ListofCard {
                 String fullname = valueMap.get("fullname", StringUtils.EMPTY);
                 String discription = valueMap.get("discription", StringUtils.EMPTY);
 
-
-
-
-
                 List<String>foodItemsList= new ArrayList<>();
                 Resource foodItemResource =item.getChild("foodItems");
                   if(foodItemResource !=null)
